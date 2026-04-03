@@ -6,6 +6,7 @@ import torch
 import torch.nn as nn
 from sklearn.metrics import auc, precision_recall_curve, roc_curve
 from torch.utils.data import DataLoader
+from torch.cuda.amp import autocast
 
 from config import ARTIFACTS_DIR, DEVICE
 
@@ -42,8 +43,10 @@ def collect_labels_and_scores(model: nn.Module, dataloader: DataLoader) -> tuple
     with torch.no_grad():
         for images, labels in dataloader:
             images = images.to(DEVICE)
-            outputs = model(images).squeeze(1)
-            probs = torch.sigmoid(outputs)
+            
+            with autocast():
+                outputs = model(images).squeeze(1)
+                probs = torch.sigmoid(outputs)
             
             all_labels.extend(labels.numpy())
             all_scores.extend(probs.cpu().numpy())
@@ -112,8 +115,9 @@ def show_prediction_panel(model: nn.Module, dataloader: DataLoader, class_names:
     labels = labels[:total_images]
     
     with torch.no_grad():
-        outputs = model(images.to(DEVICE)).squeeze(1)
-        probs = torch.sigmoid(outputs).cpu().numpy()
+        with autocast():
+            outputs = model(images.to(DEVICE)).squeeze(1)
+            probs = torch.sigmoid(outputs).cpu().numpy()
 
     fig, axes = plt.subplots(n_rows, n_cols, figsize=(16, 16))
     axes = axes.flatten()

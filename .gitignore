@@ -2,10 +2,6 @@
 kagglecatsanddogs_5340/
 kagglecatsanddogs_5340.zip
 
-# Training Artifacts
-artifacts/
-training_output.log
-
 # Python
 __pycache__/
 *.pyc
