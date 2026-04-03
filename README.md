@@ -45,7 +45,7 @@ To bypass TensorFlow/Keras deprecation issues on the GB10 architecture, this pip
 
 All training artifacts, including the best model weights (`best_resnet50_model.pth`) and the evaluation plots, are saved in the `artifacts/` directory.
 
-### 📊 Artifacts Interpretation & Training Dynamics
+### Artifacts Interpretation & Training Dynamics
 
 #### Why Early Stopping?
 The final training phase was configured for a maximum of 12 epochs, but training automatically halted after Epoch 7, with the final model weights being restored from **Epoch 6**. 
