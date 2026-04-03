@@ -1,0 +1,9 @@
+torch
+torchvision
+torchaudio
+optuna
+plotly
+pandas
+scikit-learn
+matplotlib
+pillow
