@@ -47,8 +47,18 @@ All training artifacts, including the best model weights (`best_resnet50_model.p
 
 ### Artifacts Interpretation & Training Dynamics
 
+#### Hyperparameter Grid Search & Final Model Selection
+The training process was divided into two distinct phases:
+1. **Grid Search (Optuna Study):** The pipeline first ran a hyperparameter search across multiple trials. To quickly evaluate each combination, every trial was trained for only **6 epochs**. A MedianPruner was used to stop unpromising trials early.
+2. **Final Training:** After the study concluded, the best hyperparameters were selected:
+   * **Dense Units (Latent Space):** `1024`
+   * **Dropout Rate:** `0.4`
+   * **Learning Rate:** `0.0001` (1e-4)
+
+The model was then rebuilt from scratch using these optimal parameters and trained for a maximum of **12 epochs** to achieve peak performance.
+
 #### Why Early Stopping?
-The final training phase was configured for a maximum of 12 epochs, but training automatically halted after Epoch 7, with the final model weights being restored from **Epoch 6**. 
+During the final 12-epoch training phase, the training automatically halted after Epoch 7, with the final model weights being restored from **Epoch 6**. 
 
 This is due to an **Early Stopping** mechanism monitoring the Validation Loss:
 * **Epoch 6:** Validation Loss reached its absolute minimum (`0.0290`) with a Validation Accuracy of `98.88%`.
