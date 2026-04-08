@@ -15,10 +15,10 @@ MAX_TRIALS = 60
 EXECUTIONS_PER_TRIAL = 1
 
 # Paths
-DATASET_ROOT = Path.cwd() / 'kagglecatsanddogs_5340' / 'PetImages'
+DATASET_ROOT = Path.cwd() / 'sample_data'
 if not DATASET_ROOT.exists():
     # Fallback in case they are directly under the folder
-    DATASET_ROOT = Path.cwd() / 'kagglecatsanddogs_5340'
+    DATASET_ROOT = Path.cwd() / 'sample_data'
 
 ARTIFACTS_DIR = Path.cwd() / 'artifacts'
 TUNER_DIR = ARTIFACTS_DIR / 'optuna_study'
