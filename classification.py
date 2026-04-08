@@ -7,7 +7,7 @@ from torch.utils.data import DataLoader
 from torchvision import datasets, transforms
 from tqdm import tqdm
 
-from config import (
+from config_challenge import (
     SEED, CPU_THREADS, DATASET_ROOT, ARTIFACTS_DIR, TUNER_DIR,
     MODEL_EXPORT_PATH, DEVICE, IMAGE_SIZE, BATCH_SIZE
 )
@@ -123,7 +123,7 @@ def main():
 
     print("\n=== Step 6: Evaluation & Visualization ===")
     plot_roc_and_pr(best_model, val_loader, dataset_classes)
-    show_prediction_panel(best_model, val_loader, dataset_classes)
+    show_prediction_panel(best_model, val_loader, display_classes)
 
     print("Pipeline Complete!")
 
